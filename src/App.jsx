@@ -1,12 +1,17 @@
 import { React, useState } from 'react'
+import Boton from './Boton'
+import Tablero from './Tablero'
+import Selector from './Selector';
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
+    <Boton />
+    <Tablero />
     </>
-  )
+  );
 }
 
 export default App
