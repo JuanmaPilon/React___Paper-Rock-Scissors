@@ -8,7 +8,33 @@ function App() {
   const [puntajeIA, setPuntajeIA] = useState(0);
   const [puntajeJugador, setPuntajeJugador] = useState(0);
 
-  const CambiarPuntajeJugador = () => {
+  const actualizarPuntajes = (resultado) => {
+    if (resultado === "Jugador") {
+      setPuntajeJugador(puntajeJugador + 1);
+    } else if (resultado === 'IA') {
+      setPuntajeIA(puntajeIA + 1);
+    }
+  };
+
+  const determinarGanador = (seleccionDeJugador) => {
+    const opciones = ["ROCK, PAPER, SCISSORS"];
+    const seleccionDeIA = opciones[Math.floor(Math.random * opciones.length)];
+    if (seleccionDeJugador === seleccionDeIA) {
+      return "Empate";
+    } else if (
+      (seleccionDeJugador === "ROCK" && seleccionDeIA === "SCISSORS") ||
+      (seleccionDeJugador === "SCISSORS" && seleccionDeIA == "PAPER") ||
+      (seleccionDeJugador === "PAPER" && seleccionDeIA === "ROCK")
+    ) {
+      actualizarPuntajes("Jugador");
+      return "Jugador";
+    } else {
+      actualizarPuntajes("IA");
+      return "IA";
+    }
+  };
+
+  const reiniciarPuntaje = () => {
     setPuntajeJugador(0);
     setPuntajeIA(0);
   };
@@ -21,11 +47,10 @@ function App() {
   return (
     <>
       <h1>ROCK PAPER OR SCIRSSORS</h1>
-      <Boton sumarUnPuntitoDePrueba={sumarUnPuntitoDePrueba} CambiarPuntajeJugador={CambiarPuntajeJugador}/>
       <Tablero puntajeJugador={puntajeJugador} puntajeIA={puntajeIA} />
-      <Selector />
+      <Selector elegirBoton={determinarGanador}/>
+      <Boton sumarUnPuntitoDePrueba={sumarUnPuntitoDePrueba} reiniciarPuntaje={reiniciarPuntaje}/>
     </>
   );
 }
-
 export default App;
