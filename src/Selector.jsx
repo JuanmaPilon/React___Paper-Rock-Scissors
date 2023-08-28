@@ -1,12 +1,19 @@
 import React from "react";
 
-function Selector({ elegirBoton }) {
+function Selector({ elegirBoton, continuarJuego }) {
+  const handleSeleccion = (opcion) => {
+    const resultado = elegirBoton(opcion);
+    if (resultado === "IA" || resultado === "Jugador") {
+      continuarJuego();
+    }
+  }
+
 
   return (
     <div>
-      <button onClick={() => elegirBoton("ROCK")}>ROCK</button>
-      <button onClick={() => elegirBoton("PAPER")}>PAPER</button>
-      <button onClick={() => elegirBoton("SCISSORS")}>SCISSORS</button>
+      <button onClick={() => handleSeleccion("ROCK")}>ROCK</button>
+      <button onClick={() => handleSeleccion("PAPER")}>PAPER</button>
+      <button onClick={() => handleSeleccion("SCISSORS")}>SCISSORS</button>
     </div>
   );
 }

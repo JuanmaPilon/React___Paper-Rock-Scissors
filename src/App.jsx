@@ -34,10 +34,22 @@ function App() {
     }
   };
 
+  const seguirPartida = () => {
+    while (puntajeJugador <= 10 && puntajeIA <= 10) {
+     const resultado = determinarGanador();
+      if (resultado === "IA" & puntajeIA === 10) {
+        alert("La IA Gano!");
+      } else if (resultado === "Jugador" && puntajeJugador === 10) {
+        alert("Ganaste!");
+        break;
+      }
+    }
+  }
+
   const reiniciarPuntaje = () => {
     setPuntajeJugador(0);
     setPuntajeIA(0);
-  };
+  }
 
   const sumarUnPuntitoDePrueba = () => {
     setPuntajeIA(puntajeIA + 1);
@@ -48,7 +60,7 @@ function App() {
     <>
       <h1>ROCK PAPER OR SCIRSSORS</h1>
       <Tablero puntajeJugador={puntajeJugador} puntajeIA={puntajeIA} />
-      <Selector elegirBoton={determinarGanador}/>
+      <Selector elegirBoton={determinarGanador} seguirPartida={seguirPartida}/>
       <Boton sumarUnPuntitoDePrueba={sumarUnPuntitoDePrueba} reiniciarPuntaje={reiniciarPuntaje}/>
     </>
   );
