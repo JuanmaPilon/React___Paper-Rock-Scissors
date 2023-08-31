@@ -3,7 +3,7 @@ import React from "react";
 function Selector({ elegirBoton, continuarJuego }) {
   const handleSeleccion = (opcion) => {
     const resultado = elegirBoton(opcion);
-    if (resultado === "IA" || resultado === "Jugador") {
+    if (resultado === "IA" || resultado === "Jugador" || resultado === "Empate") {
       continuarJuego();
     }
   }

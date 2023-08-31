@@ -9,10 +9,14 @@ function App() {
   const [puntajeJugador, setPuntajeJugador] = useState(0);
 
   const actualizarPuntajes = (resultado) => {
-    if (resultado === "Jugador") {
-      setPuntajeJugador(puntajeJugador + 1);
-    } else if (resultado === 'IA') {
-      setPuntajeIA(puntajeIA + 1);
+    if (puntajeIA <= 9 && puntajeJugador <= 9) {
+      if (resultado === "Jugador") {
+        setPuntajeJugador(puntajeJugador + 1);
+      } else if (resultado === 'IA') {
+        setPuntajeIA(puntajeIA + 1);
+      } else if (resultado === "Empate"){
+       alert("Hubo empate!")
+      }
     }
   };
 
@@ -20,10 +24,11 @@ function App() {
     const opciones = ["ROCK", "PAPER", "SCISSORS"];
     const seleccionDeIA = opciones[Math.floor(Math.random() * opciones.length)];
     if (seleccionDeJugador === seleccionDeIA) {
+      console.log('Empate');
       return "Empate";
     } else if (
       (seleccionDeJugador === "ROCK" && seleccionDeIA === "SCISSORS") ||
-      (seleccionDeJugador === "SCISSORS" && seleccionDeIA == "PAPER") ||
+      (seleccionDeJugador === "SCISSORS" && seleccionDeIA === "PAPER") ||
       (seleccionDeJugador === "PAPER" && seleccionDeIA === "ROCK")
     ) {
       actualizarPuntajes("Jugador");
@@ -35,34 +40,33 @@ function App() {
   };
 
   const seguirPartida = () => {
-    while (puntajeJugador <= 10 && puntajeIA <= 10) {
-     const resultado = determinarGanador();
-      if (resultado === "IA" & puntajeIA === 10) {
-        alert("La IA Gano!");
-      } else if (resultado === "Jugador" && puntajeJugador === 10) {
-        alert("Ganaste!");
-        break;
-      }
+    if (puntajeIA >= 9) {
+      alert("La IA Gano!");
+    } else if (puntajeJugador >= 9 ) {
+      alert("Tu Ganaste!");
     }
-  }
-
+  };
+  
   const reiniciarPuntaje = () => {
     setPuntajeJugador(0);
     setPuntajeIA(0);
   }
 
   const sumarUnPuntitoDePrueba = () => {
-    setPuntajeIA(puntajeIA + 1);
-    setPuntajeJugador(puntajeJugador + 1);
+    if (puntajeJugador < 10 && puntajeIA < 10) {
+      setPuntajeIA(puntajeIA + 1);
+      setPuntajeJugador(puntajeJugador + 1);
+    }
   }
 
   return (
     <>
-      <h1>ROCK PAPER OR SCIRSSORS</h1>
+      <h1>ROCK PAPER OR SCISSORS</h1>
       <Tablero puntajeJugador={puntajeJugador} puntajeIA={puntajeIA} />
-      <Selector elegirBoton={determinarGanador} seguirPartida={seguirPartida}/>
-      <Boton sumarUnPuntitoDePrueba={sumarUnPuntitoDePrueba} reiniciarPuntaje={reiniciarPuntaje}/>
+      <Selector elegirBoton={determinarGanador} continuarJuego={seguirPartida} />
+      <Boton sumarUnPuntitoDePrueba={sumarUnPuntitoDePrueba} reiniciarPuntaje={reiniciarPuntaje} />
     </>
   );
 }
+
 export default App;
