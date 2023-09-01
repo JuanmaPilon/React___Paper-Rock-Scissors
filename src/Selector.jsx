@@ -11,7 +11,9 @@ function Selector({ elegirBoton, continuarJuego }) {
 
   return (
     <div>
-      <button onClick={() => handleSeleccion("ROCK")}>ROCK</button>
+      <button className="boton-piedra" onClick={() => handleSeleccion("ROCK")}>
+         ROCK
+         </button>
       <button onClick={() => handleSeleccion("PAPER")}>PAPER</button>
       <button onClick={() => handleSeleccion("SCISSORS")}>SCISSORS</button>
     </div>

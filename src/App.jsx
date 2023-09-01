@@ -2,6 +2,8 @@ import { React, useState } from "react";
 import Boton from "./Boton";
 import Tablero from "./Tablero";
 import Selector from "./Selector";
+import './Estilos.css';
+
 
 function App() {
   
@@ -41,7 +43,7 @@ function App() {
     }
   };
 
-  const seguirPartida = () => {
+  const finalizarPartida = () => {
     if (puntajeIA >= 9) {
       alert("La IA Gano!");
     } else if (puntajeJugador >= 9 ) {
@@ -67,7 +69,7 @@ function App() {
       <Tablero puntajeJugador={puntajeJugador} puntajeIA={puntajeIA} />
       {empate && <h1>Hubo empate!</h1>}
       {empate && console.log("Alo")}
-      <Selector elegirBoton={determinarGanador} continuarJuego={seguirPartida} />
+      <Selector elegirBoton={determinarGanador} continuarJuego={finalizarPartida} />
       <Boton sumarUnPuntitoDePrueba={sumarUnPuntitoDePrueba} reiniciarPuntaje={reiniciarPuntaje} />
     </>
   );
