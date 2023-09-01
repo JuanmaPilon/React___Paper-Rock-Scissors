@@ -7,6 +7,7 @@ function App() {
   
   const [puntajeIA, setPuntajeIA] = useState(0);
   const [puntajeJugador, setPuntajeJugador] = useState(0);
+  const [empate, setEmpate] = useState(false);
 
   const actualizarPuntajes = (resultado) => {
     if (puntajeIA <= 9 && puntajeJugador <= 9) {
@@ -15,7 +16,8 @@ function App() {
       } else if (resultado === 'IA') {
         setPuntajeIA(puntajeIA + 1);
       } else if (resultado === "Empate"){
-       alert("Hubo empate!")
+        console.log("Funciona por favor");
+       setEmpate(true);
       }
     }
   };
@@ -24,7 +26,7 @@ function App() {
     const opciones = ["ROCK", "PAPER", "SCISSORS"];
     const seleccionDeIA = opciones[Math.floor(Math.random() * opciones.length)];
     if (seleccionDeJugador === seleccionDeIA) {
-      console.log('Empate');
+      console.log("funcxionaasaa");
       return "Empate";
     } else if (
       (seleccionDeJugador === "ROCK" && seleccionDeIA === "SCISSORS") ||
@@ -63,6 +65,8 @@ function App() {
     <>
       <h1>ROCK PAPER OR SCISSORS</h1>
       <Tablero puntajeJugador={puntajeJugador} puntajeIA={puntajeIA} />
+      {empate && <h1>Hubo empate!</h1>}
+      {empate && console.log("Alo")}
       <Selector elegirBoton={determinarGanador} continuarJuego={seguirPartida} />
       <Boton sumarUnPuntitoDePrueba={sumarUnPuntitoDePrueba} reiniciarPuntaje={reiniciarPuntaje} />
     </>
